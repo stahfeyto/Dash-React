@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "types": [],
+    "baseUrl": "src", 
+    "paths": {
+      "@/*": ["./*"] 
+    }
+  },
+  "exclude": ["node_modules", "src/reportWebVitals.js"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}
