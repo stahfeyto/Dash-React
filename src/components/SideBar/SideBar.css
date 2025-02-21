@@ -101,3 +101,8 @@ padding: 5px 1px;
     display: none;
     }
 }
+
+.sidebar-logo img {
+  width: 24px;
+  height: auto;
+}

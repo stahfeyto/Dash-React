@@ -14,27 +14,23 @@ export const baseConfig = {
   titleSuffix: "",
   search: true,
   header: true,
-  headerText: "Logo",
+  headerText: "Dash",
   footer: true,
   footerText: (
     <>
-      <span>
-        © MIT {new Date().getFullYear()}, Made with ❤️ by {""}
-        <a href="https://github.com/stahfeyto" target="_blank" rel="noreferrer">
-          Mrtzdev
-        </a>
-      </span>
+
     </>
   ),
 
   logo: (
     <>
       <img
-        src={process.env.PUBLIC_URL + "/logo.png"}
-        alt="logo"
-        width="30"
-        height="22"
-      />
+      src={process.env.PUBLIC_URL + "/logo.png"}
+      alt="logo"
+      width="24"
+      height="20"
+    />
+
     </>
   ),
 };

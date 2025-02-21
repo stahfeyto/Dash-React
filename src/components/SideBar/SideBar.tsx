@@ -11,6 +11,7 @@ const SideBar = () => {
   const dashboardNav = [
     { eventKey: "dashboard", title: "Dashboard", to: "/" }
   ];
+  
 
   useEffect(() => {
     setExpand(false);
@@ -27,5 +28,5 @@ const SideBar = () => {
     </>
   );
 };
-  
+
 export default SideBar;
