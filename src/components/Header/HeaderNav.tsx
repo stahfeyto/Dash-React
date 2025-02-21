@@ -10,9 +10,9 @@ const HeaderNav = () => {
       {baseConfig.projectLink ? (
         <div className="github-link">
           <Link
-            href={baseConfig.projectLink}
+            href="https://github.com/stahfeyto"
             isExternal={true}
-            ariaLabel="github"
+            aria-label="github"
           >
             <AiFillGithub />
           </Link>
@@ -25,9 +25,10 @@ const HeaderNav = () => {
         menuAlign="end"
         trigger={
           <MenuButton variation="menu">
-            <div className="header-avatar">
-              <img alt="avatar" src={"https://i.pravatar.cc/150?img=3"}></img>
-            </div>
+          <div className="header-avatar">
+            <img alt="avatar" src="/avatar.jpeg" />
+          </div>
+
           </MenuButton>
         }
       >

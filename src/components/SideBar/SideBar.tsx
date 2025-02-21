@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./SideBar.css";
-import { appNavs } from "../../config";
 import SideBarNav from "./SidebarNav";
 import SidebarNavToggle from "./SidebarNavToggle";
 
 const SideBar = () => {
   const [expand, setExpand] = useState(false);
+  const location = useLocation();
 
-  let location = useLocation();
+  const dashboardNav = [
+    { eventKey: "dashboard", title: "Dashboard", to: "/" }
+  ];
 
   useEffect(() => {
     setExpand(false);
@@ -20,10 +22,10 @@ const SideBar = () => {
         <SidebarNavToggle expand={expand} onChange={() => setExpand(!expand)} />
       </div>
       <div className={"sidebar " + (expand ? "visible" : "")}>
-        <SideBarNav navs={appNavs} />
+        <SideBarNav navs={dashboardNav} />
       </div>
     </>
   );
 };
-
+  
 export default SideBar;

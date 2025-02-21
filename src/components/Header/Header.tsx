@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="header">
       <Flex
-        direction="row"
+        direction="row" 
         alignItems="center"
         wrap="nowrap"
         gap="1rem"

@@ -12,7 +12,6 @@ const HeaderSearchBar = () => {
         options={[
           { id: "traffic", label: "Traffic" },
           { id: "sales", label: "Sales" },
-          { id: "users", label: "Users" },
           { id: "tables", label: "Tables" },
           { id: "forms", label: "Forms" },
         ]}
