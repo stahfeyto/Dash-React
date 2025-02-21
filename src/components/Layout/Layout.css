@@ -1,6 +1,6 @@
 
 .layout-container {
-background-color: var(--amplify-colors-background-secondary);
+background-color: #193468	;
 }
 
 
@@ -23,7 +23,16 @@ background-color: var(--amplify-colors-background-secondary);
 
 .card-title {
 font-weight: 600;
+color: #193468;
 }
+.card-statistics-amount{
+    color: #193468;
+}
+
+.amplify-card{
+    background-color: #dce3fa;
+}
+
 
     
 

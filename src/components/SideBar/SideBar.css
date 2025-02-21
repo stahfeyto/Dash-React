@@ -1,7 +1,7 @@
 
 
 .sidebar {
-background-color: #fff;
+background-color: #193468;
 color: #fff; 
 position: fixed;
 top: 0px;
@@ -27,7 +27,7 @@ width: 260px;
 
 
 .sidebar a {
-color: var(--amplify-components-text-color); 
+color: red; 
 text-decoration: none;
 }
 
@@ -43,7 +43,7 @@ display: block;
 padding: 14px 36px; 
 padding-left: 56px;
 font-weight: 600;
-color: var(--amplify-colors-brand-primary-100);
+color: red;
 line-height: 1.25;
 position: relative;
 transition: 0.2s ease all;
@@ -75,17 +75,23 @@ line-height: 1.25;
 }
 
 .sidebar-nav ul li a:hover {
-color: var(--amplify-components-link-color);
-background-color: #f5f8fa;
+color: red;
+background-color: #dce3fa;
+border-radius: 0px 24px 24px 0px;
 }
 
 .sidebar-nav ul li a.active {
-color: var(--amplify-components-link-color);
+color: #dce3fa;
 
 }
 
+.sidebar-nav ul li a.active:hover {
+    color: #193468;
+    
+    }
+
 .btn-sidebar-nav {
-background-color: #fff;
+background-color: #dce3fa;
 position: fixed;
 top: 0px;
 left: 0;

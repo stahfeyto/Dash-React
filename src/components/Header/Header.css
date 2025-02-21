@@ -1,7 +1,7 @@
 
 
 .header {
-background-color: #fff;
+background-color: #193468;
 position: fixed;
 z-index: 10; 
 top: 0;
@@ -20,10 +20,11 @@ padding: 0 20px;
 display: flex;
 }
 
-.amplify-menu-content {
-border-color: #fff;
+.amplify-menu-content{
+    background-color: #193468;
+    color: #dce3fa;
+    
 }
-
 .header-avatar {
 width: 34px;
 height: 34px;
@@ -38,8 +39,8 @@ height: 34px;
 
 
 .header-logo {
-width: 20px;
-height: 30px;
+width: 34px;
+height: 34px;
 }
 
 .header-logo img {
@@ -69,4 +70,47 @@ font-size: 24px;
 
 .header-search-bar {
 padding: 7px 15px;
+background-color: #193468;
+color: #dce3fa;
+}
+
+.header-search-bar input {
+    color: #dce3fa;
+    border-radius: 12px;
+    background-color: #193468;
+    border: 2px solid #dce3fa;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+
+}
+
+.header-search-bar input::placeholder {
+    color: #dce3fa;
+}
+
+.amplify-link svg{
+    fill: #dce3fa;
+    text-decoration: none;
+}
+
+.amplify-button {
+    background-color: #193468;
+    color: #dce3fa;
+
+    border-radius: 24px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.amplify-button svg {
+    fill: #dce3fa;
+    margin-right: 5px;
+}
+.amplify-button:hover {
+    background-color: #dce3fa;
+    color: #193468;
 }

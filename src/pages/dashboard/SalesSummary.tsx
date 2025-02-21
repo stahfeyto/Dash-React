@@ -1,60 +1,68 @@
-import React from "react";
-import Chart from "react-apexcharts";
+import React, { FC } from "react";
+import ReactECharts from "echarts-for-react";
 
-interface SalesSummaryProps {
-  title?: string;
+type LineRaceChartProps = {
+  title: string;
   data: any;
-  type?:
-    | "line"
-    | "area"
-    | "bar"
-    | "histogram"
-    | "pie"
-    | "donut"
-    | "radialBar"
-    | "scatter"
-    | "bubble"
-    | "heatmap"
-    | "treemap"
-    | "boxPlot"
-    | "candlestick"
-    | "radar"
-    | "polarArea"
-    | "rangeBar";
-  options?: any;
-  labels?: string[];
-}
+  type: string;
+  labels: string[];
+};
 
-const defaultOptions = {
-  toolbar: {
-    show: false,
-  },
-  chart: {
-    toolbar: {
-      show: false,
+const LineRaceChart: FC<LineRaceChartProps> = () => {
+  const data = [
+    { month: "Jan", visits: 1200, purchases: 300, subscriptions: 150 },
+    { month: "Feb", visits: 1500, purchases: 400, subscriptions: 200 },
+    { month: "Mar", visits: 1800, purchases: 450, subscriptions: 250 },
+    { month: "Apr", visits: 2000, purchases: 500, subscriptions: 300 },
+    { month: "May", visits: 2200, purchases: 600, subscriptions: 350 },
+    { month: "Jun", visits: 2500, purchases: 700, subscriptions: 400 },
+    { month: "Jul", visits: 2700, purchases: 750, subscriptions: 420 },
+    { month: "Aug", visits: 2600, purchases: 720, subscriptions: 410 },
+    { month: "Sep", visits: 2300, purchases: 650, subscriptions: 380 },
+    { month: "Oct", visits: 2100, purchases: 600, subscriptions: 350 },
+    { month: "Nov", visits: 1900, purchases: 500, subscriptions: 300 },
+    { month: "Dec", visits: 3000, purchases: 747, subscriptions: 825 },
+  ];
+
+  const months = data.map((item) => item.month);
+
+  const options = {
+    timeline: {
+      axisType: "category",
+      autoPlay: true,
+      playInterval: 1500,
+      data: months,
     },
-  },
+    options: months.map((month, index) => ({
+      title: { text: `Desempenho em ${month}` },
+      tooltip: { trigger: "axis" },
+      legend: { top: "5%" },
+      xAxis: { type: "category", data: months.slice(0, index + 1) },
+      yAxis: { type: "value" },
+      series: [
+        {
+          name: "Visitas",
+          type: "line",
+          data: data.slice(0, index + 1).map((item) => item.visits),
+          itemStyle: { color: "#007bff" },
+        },
+        {
+          name: "Compras",
+          type: "line",
+          data: data.slice(0, index + 1).map((item) => item.purchases),
+          itemStyle: { color: "#87c4ff" },
+        },
+        {
+          name: "Subscrições",
+          type: "line",
+          data: data.slice(0, index + 1).map((item) => item.subscriptions),
+          itemStyle: { color: "#b5aada" },
+        },
+      ],
+    })),
+  };
 
-  colors: ["#5f71e4", "#2dce88"],
-  legend: {
-    show: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
+  return <ReactECharts option={options} style={{ height: 500, width: "100%" }} />;
 };
 
-const SalesSummary = ({ data, type, labels, options }: SalesSummaryProps) => {
-  return (
-    <>
-      <Chart
-        series={data}
-        type={type as any}
-        height={300}
-        options={Object.assign({}, defaultOptions, options, { labels })}
-      ></Chart>
-    </>
-  );
-};
-
-export default SalesSummary;
+export default LineRaceChart;

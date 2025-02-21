@@ -41,8 +41,8 @@
     -moz-box-pack: center;
     justify-content: center;
     border-radius: 12px;
-    color: #fff;
-    background-color: var(--amplify-colors-brand-primary-60);
+    color: #dce3fa;
+    background-color: #5e77d3;
     /*background-color: #406abf;*/
     font-size: 22px;
 }
