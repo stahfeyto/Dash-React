@@ -29,15 +29,7 @@ const BarChart: FC<BarChartProps> = () => {
   const totalSubscriptions = data.reduce((acc, curr) => acc + curr.subscriptions, 0);
 
   const options = {
-    title: {
-      text: "Distribuição Anual de Tráfego",
-      left: "center",
-      textStyle: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: "#333",
-      },
-    },
+
     tooltip: {
       trigger: "item",
       formatter: "{b}: {c} ({d}%)",
@@ -54,7 +46,7 @@ const BarChart: FC<BarChartProps> = () => {
       {
         name: "Total Anual",
         type: "pie",
-        radius: ["40%", "65%"], // Donut ligeiramente mais pequeno
+        radius: ["40%", "65%"],
         center: ["50%", "50%"],
         avoidLabelOverlap: false,
         itemStyle: {

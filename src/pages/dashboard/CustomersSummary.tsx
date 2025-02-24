@@ -25,11 +25,7 @@ const BarChart: FC<BarChartProps> = () => {
   ];
 
   const options = {
-    title: {
-      text: "Desempenho Anual",
-      left: "center",
-      textStyle: { color: "#333" }
-    },
+
     radar: {
       indicator: [
         { name: "Visitas", max: 3500 },
