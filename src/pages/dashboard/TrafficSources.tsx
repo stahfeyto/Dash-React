@@ -1,14 +1,58 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
+import { useMediaQuery } from "@react-hook/media-query";
 
 type BarChartProps = {
   title: string;
   data: any;
   type: string;
   labels: string[];
-}
+};
 
 const BarChart: FC<BarChartProps> = () => {
+  const chartRef = useRef<any>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  useEffect(() => {
+    const handleResize = () => {
+      const instance = chartRef.current?.getEchartsInstance();
+
+      if (instance) {
+        const newOptions = {
+          ...instance.getOption(),
+          legend: {
+            orient: isMobile ? "vertical" : "horizontal",
+            bottom: isMobile ? "10%" : "5%",
+            textStyle: {
+              fontSize: isMobile ? 10 : 12,
+            },
+          },
+          series: [
+            {
+              ...instance.getOption().series[0],
+              radius: isMobile ? ["30%", "55%"] : ["40%", "65%"],
+              label: {
+                fontSize: isMobile ? 10 : 12,
+              },
+              emphasis: {
+                label: {
+                  fontSize: isMobile ? 12 : 16,
+                },
+              },
+            },
+          ],
+        };
+
+        instance.setOption(newOptions);
+        instance.resize();
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const data = [
     { month: "Jan", visits: 1200, purchases: 300, subscriptions: 150 },
     { month: "Feb", visits: 1500, purchases: 400, subscriptions: 200 },
@@ -29,16 +73,15 @@ const BarChart: FC<BarChartProps> = () => {
   const totalSubscriptions = data.reduce((acc, curr) => acc + curr.subscriptions, 0);
 
   const options = {
-
     tooltip: {
       trigger: "item",
       formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      bottom: "5%",
+      orient: isMobile ? "vertical" : "horizontal",
+      bottom: isMobile ? "10%" : "5%",
       textStyle: {
-        fontSize: 12,
+        fontSize: isMobile ? 10 : 12,
         color: "#555",
       },
     },
@@ -46,7 +89,7 @@ const BarChart: FC<BarChartProps> = () => {
       {
         name: "Total Anual",
         type: "pie",
-        radius: ["40%", "65%"],
+        radius: isMobile ? ["30%", "55%"] : ["40%", "65%"],
         center: ["50%", "50%"],
         avoidLabelOverlap: false,
         itemStyle: {
@@ -58,13 +101,13 @@ const BarChart: FC<BarChartProps> = () => {
           show: true,
           position: "inside",
           formatter: "{d}%",
-          fontSize: 12,
+          fontSize: isMobile ? 10 : 12,
           color: "black",
         },
         emphasis: {
           label: {
             show: true,
-            fontSize: 16,
+            fontSize: isMobile ? 12 : 16,
             fontWeight: "bold",
             color: "#333",
           },
@@ -90,7 +133,20 @@ const BarChart: FC<BarChartProps> = () => {
     ],
   };
 
-  return <ReactECharts option={options} style={{ height: 350, width: "100%" }} />;
+  return (
+    <div className="p-6 rounded-2xl shadow-lg" style={{ backgroundColor: "rgba(02,02,02)", borderRadius: "24px" }}>
+      <ReactECharts
+        ref={chartRef}
+        option={options}
+        style={{ height: isMobile ? "300px" : "400px", width: "100%" }}
+        opts={{
+          renderer: "canvas",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    </div>
+  );
 };
 
 export default BarChart;

@@ -20,3 +20,14 @@
 #6565ff
 
 #8787fb
+
+
+  useEffect(() => {
+    const doChartData = async () => {
+      const result = await getChartData();
+      setBarChartData(result);
+      setTrafficSourceData([112332, 123221, 432334, 342334, 133432]);
+    };
+
+    doChartData();
+  }, []);

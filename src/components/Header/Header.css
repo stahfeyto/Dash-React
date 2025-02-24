@@ -1,7 +1,7 @@
 
 
 .header {
-background-color: #193468;
+background-color: #000000;
 position: fixed;
 z-index: 10; 
 top: 0;
@@ -21,7 +21,7 @@ display: flex;
 }
 
 .amplify-menu-content{
-    background-color: #193468;
+    background-color:#000000;
     color: #dce3fa;
     
 }
@@ -35,6 +35,13 @@ overflow: hidden;
 .header-avatar img {
 width: 34px;
 height: 34px;
+}
+
+.amplify-flex {
+display: flex;
+align-items: center;
+color: #dce3fa;
+font-weight: 800;
 }
 
 
@@ -70,14 +77,14 @@ font-size: 24px;
 
 .header-search-bar {
 padding: 7px 15px;
-background-color: #193468;
+background-color: #000000;
 color: #dce3fa;
 }
 
 .header-search-bar input {
     color: #dce3fa;
     border-radius: 12px;
-    background-color: #193468;
+    background-color: #000000;
     border: 2px solid #dce3fa;
     padding: 5px 10px;
     width: 100%;
@@ -90,13 +97,28 @@ color: #dce3fa;
     color: #dce3fa;
 }
 
+.header-search-bar input:focus {
+    border: 2px solid #007bff;
+    animation: borderColorChange 2s infinite;
+    outline: none;
+}
+
+@keyframes borderColorChange {
+    0% { border-color: #007bff; }
+    25% { border-color: #00aaff; }
+    50% { border-color: #0056d2; }
+    75% { border-color: #0099ff; }
+    100% { border-color: #007bff; }
+}
+
+
 .amplify-link svg{
     fill: #dce3fa;
     text-decoration: none;
 }
 
 .amplify-button {
-    background-color: #193468;
+    background-color: #000000;
     color: #dce3fa;
 
     border-radius: 24px;
@@ -112,5 +134,5 @@ color: #dce3fa;
 }
 .amplify-button:hover {
     background-color: #dce3fa;
-    color: #193468;
+    color: #000000;
 }

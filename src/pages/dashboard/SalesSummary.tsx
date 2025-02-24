@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
+import { useMediaQuery } from "@react-hook/media-query";
 
 type LineRaceChartProps = {
   title: string;
@@ -9,6 +10,53 @@ type LineRaceChartProps = {
 };
 
 const LineRaceChart: FC<LineRaceChartProps> = () => {
+  const chartRef = useRef<any>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  useEffect(() => {
+    const handleResize = () => {
+      const instance = chartRef.current?.getEchartsInstance();
+
+      if (instance) {
+        const newOptions = {
+          ...instance.getOption(),
+          timeline: {
+            ...instance.getOption().timeline,
+            playInterval: isMobile ? 2000 : 1500,
+          },
+          title: {
+            textStyle: {
+              fontSize: isMobile ? 14 : 18,
+            },
+          },
+          legend: {
+            top: "5%",
+            textStyle: {
+              fontSize: isMobile ? 10 : 12,
+            },
+          },
+          xAxis: {
+            axisLabel: {
+              fontSize: isMobile ? 10 : 12,
+            },
+          },
+          yAxis: {
+            axisLabel: {
+              fontSize: isMobile ? 10 : 12,
+            },
+          },
+        };
+
+        instance.setOption(newOptions);
+        instance.resize();
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const data = [
     { month: "Jan", visits: 1200, purchases: 300, subscriptions: 150 },
     { month: "Feb", visits: 1500, purchases: 400, subscriptions: 200 },
@@ -30,15 +78,36 @@ const LineRaceChart: FC<LineRaceChartProps> = () => {
     timeline: {
       axisType: "category",
       autoPlay: true,
-      playInterval: 1500,
+      playInterval: isMobile ? 2000 : 1500,
       data: months,
     },
     options: months.map((month, index) => ({
-      title: { text: `Desempenho em ${month}` },
+      title: {
+        text: `Desempenho em ${month}`,
+        textStyle: {
+          fontSize: isMobile ? 14 : 18,
+        },
+      },
       tooltip: { trigger: "axis" },
-      legend: { top: "5%" },
-      xAxis: { type: "category", data: months.slice(0, index + 1) },
-      yAxis: { type: "value" },
+      legend: {
+        top: "5%",
+        textStyle: {
+          fontSize: isMobile ? 10 : 12,
+        },
+      },
+      xAxis: {
+        type: "category",
+        data: months.slice(0, index + 1),
+        axisLabel: {
+          fontSize: isMobile ? 10 : 12,
+        },
+      },
+      yAxis: {
+        type: "value",
+        axisLabel: {
+          fontSize: isMobile ? 10 : 12,
+        },
+      },
       series: [
         {
           name: "Visitas",
@@ -61,8 +130,20 @@ const LineRaceChart: FC<LineRaceChartProps> = () => {
       ],
     })),
   };
-
-  return <ReactECharts option={options} style={{ height: 500, width: "100%" }} />;
+  return (
+    <div className="p-6 rounded-2xl shadow-lg" style={{ backgroundColor: "rgba(02,02,02)", borderRadius: "24px" }}>
+      <ReactECharts
+        ref={chartRef}
+        option={options}
+        style={{ height: isMobile ? "300px" : "400px", width: "100%" }}
+        opts={{
+          renderer: "canvas",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    </div>
+  );
 };
 
 export default LineRaceChart;

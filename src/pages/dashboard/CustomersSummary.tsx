@@ -1,14 +1,67 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
+import { useMediaQuery } from "@react-hook/media-query";
 
 type BarChartProps = {
   title: string;
   data: any;
   type: string;
   labels: string[];
-}
+};
 
 const BarChart: FC<BarChartProps> = () => {
+  const chartRef = useRef<any>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  useEffect(() => {
+    const handleResize = () => {
+      const instance = chartRef.current?.getEchartsInstance();
+
+      if (instance) {
+        const newOptions = {
+          ...instance.getOption(),
+          radar: {
+            indicator: [
+              { name: "Visitas", max: 3500 },
+              { name: "Compras", max: 1000 },
+              { name: "Subscrições", max: 1000 },
+            ],
+            splitLine: {
+              lineStyle: {
+                color: ["#555"],
+              },
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#555",
+              },
+            },
+          },
+          legend: {
+            top: "5%",
+            textStyle: {
+              fontSize: isMobile ? 10 : 12,
+            },
+          },
+          grid: {
+            left: isMobile ? "5%" : "3%",
+            right: isMobile ? "5%" : "4%",
+            bottom: isMobile ? "15%" : "3%",
+            top: isMobile ? "15%" : "10%",
+            containLabel: true,
+          },
+        };
+
+        instance.setOption(newOptions);
+        instance.resize();
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const data = [
     { month: "Jan", visits: 1200, purchases: 300, subscriptions: 150 },
     { month: "Feb", visits: 1500, purchases: 400, subscriptions: 200 },
@@ -25,7 +78,6 @@ const BarChart: FC<BarChartProps> = () => {
   ];
 
   const options = {
-
     radar: {
       indicator: [
         { name: "Visitas", max: 3500 },
@@ -45,6 +97,12 @@ const BarChart: FC<BarChartProps> = () => {
     },
     tooltip: {
       trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      textStyle: {
+        fontSize: isMobile ? 10 : 12,
+      },
     },
     series: [
       {
@@ -66,7 +124,20 @@ const BarChart: FC<BarChartProps> = () => {
     ],
   };
 
-  return <ReactECharts option={options} style={{ height: 500, width: "100%" }} />;
+  return (
+    <div className="p-6 rounded-2xl shadow-lg" style={{ backgroundColor: "rgba(02,02,02)", borderRadius: "24px" }}>
+      <ReactECharts
+        ref={chartRef}
+        option={options}
+        style={{ height: isMobile ? "300px" : "400px", width: "100%" }}
+        opts={{
+          renderer: "canvas",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    </div>
+  );
 };
 
 export default BarChart;

@@ -1,7 +1,7 @@
 
 
 .sidebar {
-background-color: #193468;
+background-color: #000000;
 color: #fff; 
 position: fixed;
 top: 0px;
@@ -86,7 +86,7 @@ color: #dce3fa;
 }
 
 .sidebar-nav ul li a.active:hover {
-    color: #193468;
+    color: #000000;
     
     }
 
